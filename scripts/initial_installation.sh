@@ -10,6 +10,25 @@ apt-get update
 apt-get upgrade
 
 apt-get -y install apache2
+
+VHOST=$(cat <<EOF
+<VirtualHost *:80>
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        <Directory "/var/www/html">
+                AllowOverride all
+        </Directory>
+
+</VirtualHost>
+EOF
+)
+echo "${VHOST}" > /etc/apache2/sites-available/000-default.conf
+
 a2enmod rewrite
 
 apt-get -y install php5 php5-mhash php5-mcrypt php5-curl php5-cli php5-mysql php5-gd libapache2-mod-php5
