@@ -8,13 +8,16 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |v|
       v.memory = 2048
       v.cpus = 2
+      # To use disksize is required to install plugin disksize
+      # $ vagrant plugin install vagrant-disksize
+      v.disksize.size = "10GB"
       v.name = "Scharlab - Test"
   end
 
   config.vm.network "private_network", ip: "192.168.33.10"
   config.vm.network :forwarded_port, guest: 80, host: 8080
 
-  # config.vm.synced_folder "../", "/schartest"
+  config.vm.synced_folder "../", "/schartest"
   config.vm.synced_folder "../www/", "/var/www/html", owner:"www-data", group:"www-data"
 
   config.vm.provision :shell, path: "scripts/initial_installation.sh"
