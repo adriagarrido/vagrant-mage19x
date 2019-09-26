@@ -4,14 +4,14 @@
 Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/trusty64"
+  # To use disksize is required to install plugin disksize
+  # $ vagrant plugin install vagrant-disksize
+  config.disksize.size = "50GB"
 
   config.vm.provider "virtualbox" do |v|
       v.memory = 2048
       v.cpus = 2
-      # To use disksize is required to install plugin disksize
-      # $ vagrant plugin install vagrant-disksize
-      v.disksize.size = "10GB"
-      v.name = "Scharlab - Test"
+      v.name = "Scharlab"
   end
 
   config.vm.network "private_network", ip: "192.168.33.10"

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 DBHOST=localhost
-DBNAME=magento
+DBNAME=scharlab
 DBUSER=root
-DBPASSWD=magento
+DBPASSWD=dbpass
 
 
 apt-get update
