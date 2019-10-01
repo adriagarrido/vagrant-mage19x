@@ -33,7 +33,7 @@ a2enmod rewrite
 
 apt-add-repository -y ppa:ondrej/php
 apt-get update
-apt-get -y install php5.6 php5.6-mcrypt php5.6-curl php5.6-cli php5.6-mysql php5.6-gd libapache2-mod-php5.6
+apt-get -y install php5.6 php5.6-xml php5.6-mcrypt php5.6-curl php5.6-cli php5.6-mysql php5.6-gd libapache2-mod-php5.6
 sed -i "s/memory_limit = 128M/memory_limit = 512M/g" /etc/php/5.6/apache2/php.ini
 
 echo "mysql-server mysql-server/root_password password $DBPASSWD" | debconf-set-selections
