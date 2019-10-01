@@ -3,22 +3,21 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "ubuntu/trusty64"
-  # To use disksize is required to install plugin disksize
-  # $ vagrant plugin install vagrant-disksize
+  config.vagrant.plugins = ["vagrant-vbguest", "vagrant-disksize"]
+  config.vm.box = "ubuntu/xenial64"
   config.disksize.size = "50GB"
 
   config.vm.provider "virtualbox" do |v|
       v.memory = 2048
       v.cpus = 2
-      v.name = "Scharlab"
+      v.name = "vagrant-mage19x"
   end
 
   config.vm.network "private_network", ip: "192.168.33.10"
-  config.vm.network :forwarded_port, guest: 80, host: 8080
 
-  config.vm.synced_folder "../", "/schartest"
-  config.vm.synced_folder "../www/", "/var/www/html", owner:"www-data", group:"www-data"
+  APACHE_UID = 33
+  APACHE_GID = 33
+  config.vm.synced_folder "public/", "/var/www/html", owner:APACHE_UID, group:APACHE_GID
 
   config.vm.provision :shell, path: "scripts/initial_installation.sh"
 
